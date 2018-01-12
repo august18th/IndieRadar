@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2002
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndieRadar.Model", "IndieRadar.Model\IndieRadar.Model.csproj", "{E51DB5A0-501B-4567-9BCB-B1CDD79FAA55}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E51DB5A0-501B-4567-9BCB-B1CDD79FAA55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E51DB5A0-501B-4567-9BCB-B1CDD79FAA55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E51DB5A0-501B-4567-9BCB-B1CDD79FAA55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E51DB5A0-501B-4567-9BCB-B1CDD79FAA55}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B10E8D45-E7B0-48D0-847F-C481327AA55F}
+	EndGlobalSection
+EndGlobal
