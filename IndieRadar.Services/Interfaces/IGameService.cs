@@ -9,11 +9,11 @@ namespace IndieRadar.Services.Interfaces
     {
         Task<ICollection<GameDTO>> GetGamesAsync();
         Task<ICollection<GameDTO>> GetGamesByGenreAsync(String gameGenre);
-        Task<ICollection<GameDTO>> GetFilterGamesByRatingAsync();
-        Task<ICollection<GameDTO>> GetFilterGamesByRatingAndGenreAsync(String gameGenre);
-        Task<GameDTO> GetGameByIdAsync(Int32 gameId);
-        void CreateGame(GameDTO goal);
-        void EditGame(GameDTO goalToEdit);
-        void DeleteGame(int gameId);
+        Task<ICollection<GameDTO>> GetSortedGamesByRatingAsync();
+        Task<ICollection<GameDTO>> GetSortedGamesByRatingAndByGenreAsync(String gameGenre);
+        Task<GameDTO> GetGameByIdAsync(Int32? gameId);
+        Task<GameDTO> CreateGameAsync(GameDTO game);
+        Task<GameDTO> EditGameAsync(GameDTO gameToEdit);
+        Task<Boolean> DeleteGameAsync(int gameId);
     }
 }

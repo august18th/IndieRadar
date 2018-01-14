@@ -56,6 +56,7 @@
     <Compile Include="Configurations\GameConfiguration.cs" />
     <Compile Include="Configurations\GameGenreConfiguration.cs" />
     <Compile Include="Configurations\GamePlatformConfiguration.cs" />
+    <Compile Include="Configurations\GenreConfiguration.cs" />
     <Compile Include="Configurations\UserConfiguration.cs" />
     <Compile Include="Infrastructure\Context\IDbContext.cs" />
     <Compile Include="Infrastructure\Context\IndieRadarDbContext.cs" />
@@ -70,13 +71,9 @@
     <Compile Include="Interfaces\Repositories\IGenreRepository.cs" />
     <Compile Include="Interfaces\Repositories\IPlatformRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUserRepository.cs" />
-    <Compile Include="Migrations\201801131538250_initial migration.cs" />
-    <Compile Include="Migrations\201801131538250_initial migration.Designer.cs">
-      <DependentUpon>201801131538250_initial migration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801131546253_vol.2.cs" />
-    <Compile Include="Migrations\201801131546253_vol.2.Designer.cs">
-      <DependentUpon>201801131546253_vol.2.cs</DependentUpon>
+    <Compile Include="Migrations\201801141423102_updModels.cs" />
+    <Compile Include="Migrations\201801141423102_updModels.Designer.cs">
+      <DependentUpon>201801141423102_updModels.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -102,11 +99,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801131538250_initial migration.resx">
-      <DependentUpon>201801131538250_initial migration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801131546253_vol.2.resx">
-      <DependentUpon>201801131546253_vol.2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201801141423102_updModels.resx">
+      <DependentUpon>201801141423102_updModels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

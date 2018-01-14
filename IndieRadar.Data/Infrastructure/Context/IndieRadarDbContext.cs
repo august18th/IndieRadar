@@ -35,6 +35,7 @@ namespace IndieRadar.Data.Infrastructure.Context
             modelBuilder.Configurations.Add(new UserConfiguration());
             modelBuilder.Configurations.Add(new GamePlatformConfiguration());
             modelBuilder.Configurations.Add(new GameGenreConfiguration());
+            modelBuilder.Configurations.Add(new GenreConfiguration());
         }
     }
 }

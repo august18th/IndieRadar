@@ -8,6 +8,6 @@ namespace IndieRadar.Model.Models
         public Int32 GameId { get; set; }
 
         public Genre Genre { get; set; }
-        public Int32 GenreId { get; set; }
+        public String GenreName { get; set; }
     }
 }
