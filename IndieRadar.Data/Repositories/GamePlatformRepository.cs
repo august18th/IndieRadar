@@ -5,9 +5,10 @@ using IndieRadar.Model.Models;
 
 namespace IndieRadar.Data.Repositories
 {
-    public class RoleRepository : GenericRepository<Role>, IRoleRepository
+    public class GamePlatformRepository :
+        GenericRepository<GamePlatform>, IGamePlatformRepository
     {
-        public RoleRepository(IDbContext dbContext) : base(dbContext)
+        public GamePlatformRepository(IDbContext dbContext) : base(dbContext)
         {
 
         }

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using IndieRadar.Model.Models.Base;
+using IndieRadar.Model.Models;
 
-namespace IndieRadar.Model.Models
+namespace IndieRadar.Services.DTO
 {
-    public class Game : BaseEntity
+    public class GameDTO
     {
         public String GameName { get; set; }
         public String DevelopmentPhase { get; set; }

@@ -3,8 +3,8 @@ using IndieRadar.Model.Models;
 
 namespace IndieRadar.Data.Interfaces.Repositories
 {
-    public interface IRoleRepository : IGenericRepository<Role>
+    public interface IGameGenreRepository : IGenericRepository<GameGenre>
     {
-
+        
     }
 }
