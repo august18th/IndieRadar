@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndieRadar.Data", "IndieRad
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndieRadar.Services", "IndieRadar.Services\IndieRadar.Services.csproj", "{1765CBC0-0046-4E02-BB11-5668D367BBD4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndieRadar.Web", "IndieRadar.Web\IndieRadar.Web.csproj", "{184886FC-390D-4E1B-A403-7F8152954CA0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{1765CBC0-0046-4E02-BB11-5668D367BBD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1765CBC0-0046-4E02-BB11-5668D367BBD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1765CBC0-0046-4E02-BB11-5668D367BBD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{184886FC-390D-4E1B-A403-7F8152954CA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{184886FC-390D-4E1B-A403-7F8152954CA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{184886FC-390D-4E1B-A403-7F8152954CA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{184886FC-390D-4E1B-A403-7F8152954CA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
