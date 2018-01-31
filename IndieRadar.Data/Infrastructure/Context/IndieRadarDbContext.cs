@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using IndieRadar.Data.Configurations;
 using IndieRadar.Model.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -11,11 +12,6 @@ namespace IndieRadar.Data.Infrastructure.Context
 
         public IndieRadarDbContext() : base(DbName)
         {
-        }
-
-        static IndieRadarDbContext()
-        {
-            Database.SetInitializer(new IndieRadarDbContextInitializer());
         }
 
         public IDbSet<Game> Games { get; set; }

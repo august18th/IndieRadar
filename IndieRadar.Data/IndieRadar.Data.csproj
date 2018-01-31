@@ -75,6 +75,10 @@
     <Compile Include="Migrations\201801141423102_updModels.Designer.cs">
       <DependentUpon>201801141423102_updModels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801281814231_fix.cs" />
+    <Compile Include="Migrations\201801281814231_fix.Designer.cs">
+      <DependentUpon>201801281814231_fix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Base\GenericRepository.cs" />
@@ -85,6 +89,7 @@
     <Compile Include="Repositories\GameplayPhotoRepository.cs" />
     <Compile Include="Repositories\GameRepository.cs" />
     <Compile Include="Repositories\GenreRepository.cs" />
+    <Compile Include="Repositories\Identity\UserStore.cs" />
     <Compile Include="Repositories\PlatformRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
@@ -101,6 +106,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201801141423102_updModels.resx">
       <DependentUpon>201801141423102_updModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801281814231_fix.resx">
+      <DependentUpon>201801281814231_fix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Login</h2>
+@using (Html.BeginForm("Login", "Account", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <p>Enter your login: </p>
+    @Html.TextBox("Email")
+    <p>Enter password: </p>
+    @Html.Password("Password")
+    <input type="submit" value="Отправить" />
+}

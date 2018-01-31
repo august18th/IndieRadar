@@ -17,7 +17,7 @@ namespace IndieRadar.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            AutofacContainerFactory.Run();
+            DependencyResolver.SetResolver(AutofacContainerFactory.SetAutofacContainer());
         }
     }
 }

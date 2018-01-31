@@ -9,6 +9,7 @@ namespace IndieRadar.Web.Infrastructure.Mapper.Profiles
         public DomainToDTOMappingProfile()
         {
             CreateMap<Game, GameDTO>();
+            CreateMap<ApplicationUser, UserDTO>();
         }
     }
 }
