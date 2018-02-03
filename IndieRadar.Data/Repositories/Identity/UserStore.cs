@@ -9,7 +9,8 @@ using Microsoft.AspNet.Identity;
 namespace IndieRadar.Data.Repositories.Identity
 {
     public class UserStore : GenericRepository<ApplicationUser>,
-        IUserPasswordStore<ApplicationUser>
+        IUserPasswordStore<ApplicationUser>, IUserLockoutStore<ApplicationUser, String>,
+        IUserTwoFactorStore<ApplicationUser, String>
     {
         public UserStore(IDbContext dbContext) : base(dbContext)
         {
@@ -72,6 +73,75 @@ namespace IndieRadar.Data.Repositories.Identity
         public Task<bool> HasPasswordAsync(ApplicationUser user)
         {
             return Task.FromResult(!String.IsNullOrEmpty(user.PasswordHash));
+        }
+
+        public Task<DateTimeOffset> GetLockoutEndDateAsync(ApplicationUser user)
+        {
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
+
+            return Task.FromResult(user.LockoutEndDateUtc.HasValue
+                ? new DateTimeOffset(DateTime.SpecifyKind(user.LockoutEndDateUtc.Value, DateTimeKind.Utc))
+                : new DateTimeOffset());
+        }
+
+        public Task SetLockoutEndDateAsync(ApplicationUser user, DateTimeOffset lockoutEnd)
+        {
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
+
+            user.LockoutEndDateUtc = lockoutEnd == DateTimeOffset.MinValue
+                ? new DateTime?()
+                : lockoutEnd.UtcDateTime;
+
+            return Task.FromResult(0);
+        }
+
+        public Task<int> IncrementAccessFailedCountAsync(ApplicationUser user)
+        {
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
+
+            user.AccessFailedCount++;
+            return Task.FromResult(user.AccessFailedCount);
+        }
+
+        public Task ResetAccessFailedCountAsync(ApplicationUser user)
+        {
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
+
+            user.AccessFailedCount = 0;
+            return Task.FromResult(0);
+        }
+
+        public Task<int> GetAccessFailedCountAsync(ApplicationUser user)
+        {
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
+
+            return Task.FromResult(user.AccessFailedCount);
+        }
+
+        public Task<bool> GetLockoutEnabledAsync(ApplicationUser user)
+        {
+            return Task.FromResult(user.LockoutEnabled);
+        }
+
+        public Task SetLockoutEnabledAsync(ApplicationUser user, bool enabled)
+        {
+            user.LockoutEnabled = enabled;
+            return Task.FromResult(0);
+        }
+
+        public Task SetTwoFactorEnabledAsync(ApplicationUser user, bool enabled)
+        {
+            return Task.FromResult(0);
+        }
+
+        public async Task<bool> GetTwoFactorEnabledAsync(ApplicationUser user)
+        {
+            return await Task.FromResult(false);
         }
     }
 }

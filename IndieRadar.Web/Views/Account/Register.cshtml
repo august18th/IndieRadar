@@ -1,4 +1,5 @@
-﻿
+﻿@model IndieRadar.Web.ViewModels.RegisterClientViewModel
+
 @{
     ViewBag.Title = "Register";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,17 +9,23 @@
 {
     @Html.AntiForgeryToken()
     <p>Enter your first name: </p>
-    @Html.TextBox("FirstName")
+    @Html.TextBoxFor(client => client.FirstName)
+    @Html.ValidationMessageFor(v => v.FirstName)
     <p>Enter your last name: </p>
-    @Html.TextBox("LastName")
+    @Html.TextBoxFor(client => client.LastName)
+    @Html.ValidationMessageFor(v => v.LastName)
     <p>Enter your email: </p>
-    @Html.TextBox("Email")
+    @Html.TextBoxFor(client => client.Email)
+    @Html.ValidationMessageFor(v => v.Email)
     <p>Enter password: </p>
-    @Html.Password("Password")
+    @Html.PasswordFor(client => client.Password)
+    @Html.ValidationMessageFor(v => v.Password)
     <p>Confirm password: </p>
-    @Html.Password("ConfirmPassword")
+    @Html.PasswordFor(client => client.ConfirmPassword)
+    @Html.ValidationMessageFor(v => v.ConfirmPassword)
     <p>Enter your login:</p>
-    @Html.TextBox("UserName")
-    <input type="submit" value="Отправить" />
+    @Html.TextBoxFor(client => client.UserName)
+    @Html.ValidationMessageFor(v => v.UserName)
+    <input type="submit" value="Зарегистрироваться" />
 }
 

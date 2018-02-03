@@ -9,6 +9,7 @@ namespace IndieRadar.Services.Interfaces.Managers
     public interface IUserManager
     {
         Task<IdentityResult> CreateAsync(UserDTO user, String password);
-        Task<ApplicationUser> FindByNameAsync(string userName);
+        Task<ApplicationUser> FindByNameAsync(String userName);
+        Task<Boolean> IsExistUserNameAsync(String userName);
     }
 }

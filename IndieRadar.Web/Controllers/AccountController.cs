@@ -5,7 +5,6 @@ using System.Web.Mvc;
 using AutoMapper;
 using IndieRadar.Services.DTO;
 using IndieRadar.Services.Interfaces.Managers;
-using IndieRadar.Services.Managers;
 using IndieRadar.Web.Infrastructure;
 using IndieRadar.Web.ViewModels;
 using Microsoft.AspNet.Identity;
@@ -43,26 +42,34 @@ namespace IndieRadar.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model)
         {
-            if (!ModelState.IsValid)
-                return View(model);
-
-            var user = await _userManager.FindByNameAsync(model.Email);
-
-            var result = await SignInService.PasswordSignInAsync(model.Email, model.Password,
-                model.RememberMe, shouldLockout: true);
-
-            switch (result)
+            if (ModelState.IsValid)
             {
-                case SignInStatus.Success:
-                    return RedirectToAction("Register");
-                case SignInStatus.LockedOut:
-                    ModelState.AddModelError("", "Вы привысили количество попыток входа. Попробуйте авторизоваться позже");
-                    return View(model);
-                default:
-                    ModelState.AddModelError("", "Неудачная попытка входа.");
-                    return View(model);
+                var user = await _userManager.FindByNameAsync(model.UserName);
+                if (user == null)
+                {
+                    ModelState.AddModelError("", @"Такого пользователя не существует");
+                }
+
+                var result = await SignInService.PasswordSignInAsync(model.UserName, model.Password,
+                    model.RememberMe, false);
+
+                switch (result)
+                {
+                    case SignInStatus.Success:
+                        return RedirectToAction("Register");
+                    case SignInStatus.LockedOut:
+                        ModelState.AddModelError("",
+                            @"Вы привысили количество попыток входа. Попробуйте авторизоваться позже");
+                        return View(model);
+                    default:
+                        ModelState.AddModelError("", @"Неудачная попытка входа.");
+                        return View(model);
+                }
             }
+
+            return View(model);
         }
+
 
         // GET: /Account/Register
         [HttpGet]
@@ -93,11 +100,18 @@ namespace IndieRadar.Web.Controllers
 
                 if (result.Succeeded)
                 {
-                    return Content("Register is success");
+                    return View("SuccessRegistration");
                 }
             }
 
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> CheckUserName(string userName)
+        {
+            Boolean isInUse = await _userManager.IsExistUserNameAsync(userName);
+            return Json(!isInUse, JsonRequestBehavior.AllowGet);
         }
     }
 }
