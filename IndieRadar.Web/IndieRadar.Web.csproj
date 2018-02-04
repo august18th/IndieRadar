@@ -189,6 +189,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\GamesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -206,7 +207,10 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\GameCardListViewModel.cs" />
     <Compile Include="ViewModels\GameCardViewModel.cs" />
+    <Compile Include="ViewModels\CreateGameViewModel.cs" />
+    <Compile Include="ViewModels\GenreViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\PlatformViewModel.cs" />
     <Compile Include="ViewModels\RegisterClientViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -249,6 +253,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Admin\" />
     <Folder Include="Views\Games\" />
   </ItemGroup>
   <ItemGroup>

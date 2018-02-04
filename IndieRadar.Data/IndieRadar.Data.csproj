@@ -58,6 +58,7 @@
     <Compile Include="Configurations\GamePlatformConfiguration.cs" />
     <Compile Include="Configurations\GenreConfiguration.cs" />
     <Compile Include="Configurations\UserConfiguration.cs" />
+    <Compile Include="Configurations\UserRoleConfiguration.cs" />
     <Compile Include="Infrastructure\Context\IDbContext.cs" />
     <Compile Include="Infrastructure\Context\IndieRadarDbContext.cs" />
     <Compile Include="Infrastructure\IndieRadarDbContextInitializer.cs" />
@@ -70,14 +71,12 @@
     <Compile Include="Interfaces\Repositories\IGameRepository.cs" />
     <Compile Include="Interfaces\Repositories\IGenreRepository.cs" />
     <Compile Include="Interfaces\Repositories\IPlatformRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IRoleRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUserRepository.cs" />
-    <Compile Include="Migrations\201801141423102_updModels.cs" />
-    <Compile Include="Migrations\201801141423102_updModels.Designer.cs">
-      <DependentUpon>201801141423102_updModels.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801281814231_fix.cs" />
-    <Compile Include="Migrations\201801281814231_fix.Designer.cs">
-      <DependentUpon>201801281814231_fix.cs</DependentUpon>
+    <Compile Include="Interfaces\Repositories\IUserRoleRepository.cs" />
+    <Compile Include="Migrations\201802041850341_1.cs" />
+    <Compile Include="Migrations\201802041850341_1.Designer.cs">
+      <DependentUpon>201802041850341_1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -89,9 +88,11 @@
     <Compile Include="Repositories\GameplayPhotoRepository.cs" />
     <Compile Include="Repositories\GameRepository.cs" />
     <Compile Include="Repositories\GenreRepository.cs" />
+    <Compile Include="Repositories\Identity\RoleRepository.cs" />
     <Compile Include="Repositories\Identity\UserStore.cs" />
     <Compile Include="Repositories\PlatformRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Repositories\UserRoleRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -104,11 +105,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801141423102_updModels.resx">
-      <DependentUpon>201801141423102_updModels.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801281814231_fix.resx">
-      <DependentUpon>201801281814231_fix.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802041850341_1.resx">
+      <DependentUpon>201802041850341_1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

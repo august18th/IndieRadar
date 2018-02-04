@@ -100,7 +100,14 @@ namespace IndieRadar.Web.Controllers
 
                 if (result.Succeeded)
                 {
-                    return View("SuccessRegistration");
+                    var currentUser = await _userManager.FindByNameAsync(model.UserName);
+                    var addToRoleResult = await _userManager.AddToRoleAsync(currentUser.Id, "User");
+                    if (addToRoleResult.Succeeded)
+                    {
+                        return View("SuccessRegistration");
+                    }
+                    ModelState.AddModelError("", @"Неудачная попытка регистрации.");
+                    return View(model);
                 }
             }
 

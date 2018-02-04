@@ -11,5 +11,6 @@ namespace IndieRadar.Services.Interfaces.Managers
         Task<IdentityResult> CreateAsync(UserDTO user, String password);
         Task<ApplicationUser> FindByNameAsync(String userName);
         Task<Boolean> IsExistUserNameAsync(String userName);
+        Task<IdentityResult> AddToRoleAsync(String userId, String role);
     }
 }

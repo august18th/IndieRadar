@@ -3,7 +3,7 @@ namespace IndieRadar.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class updModels : DbMigration
+    public partial class _1 : DbMigration
     {
         public override void Up()
         {
@@ -171,14 +171,30 @@ namespace IndieRadar.Data.Migrations
                     {
                         Id = c.String(nullable: false, maxLength: 128),
                         Name = c.String(nullable: false, maxLength: 256),
+                        Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
+            
+            CreateTable(
+                "dbo.UserRoles",
+                c => new
+                    {
+                        RoleId = c.String(nullable: false, maxLength: 128),
+                        UserId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.RoleId, t.UserId })
+                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
+                .ForeignKey("dbo.ApplicationUsers", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.RoleId)
+                .Index(t => t.UserId);
             
         }
         
         public override void Down()
         {
+            DropForeignKey("dbo.UserRoles", "UserId", "dbo.ApplicationUsers");
+            DropForeignKey("dbo.UserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.GameGenres", "GenreName", "dbo.Genres");
             DropForeignKey("dbo.GameplayPhotoes", "GameId", "dbo.Games");
@@ -190,6 +206,8 @@ namespace IndieRadar.Data.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "ApplicationUser_Id", "dbo.ApplicationUsers");
             DropForeignKey("dbo.AspNetUserClaims", "ApplicationUser_Id", "dbo.ApplicationUsers");
             DropForeignKey("dbo.CommentUsers", "CommentId", "dbo.Comments");
+            DropIndex("dbo.UserRoles", new[] { "UserId" });
+            DropIndex("dbo.UserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.GameplayPhotoes", new[] { "GameId" });
             DropIndex("dbo.GamePlatforms", new[] { "PlatformId" });
@@ -202,6 +220,7 @@ namespace IndieRadar.Data.Migrations
             DropIndex("dbo.AspNetUserClaims", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.CommentUsers", new[] { "UserId" });
             DropIndex("dbo.CommentUsers", new[] { "CommentId" });
+            DropTable("dbo.UserRoles");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.Genres");
             DropTable("dbo.GameplayPhotoes");

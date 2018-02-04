@@ -22,6 +22,7 @@ namespace IndieRadar.Data.Infrastructure.Context
         public IDbSet<GameplayPhoto> GameplayPhotos { get; set; }
         public IDbSet<Comment> Comments { get; set; }
         public IDbSet<CommentUser> CommentUsers { get; set; }
+        public IDbSet<UserRole> UserRoles { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -32,6 +33,7 @@ namespace IndieRadar.Data.Infrastructure.Context
             modelBuilder.Configurations.Add(new GamePlatformConfiguration());
             modelBuilder.Configurations.Add(new GameGenreConfiguration());
             modelBuilder.Configurations.Add(new GenreConfiguration());
+            modelBuilder.Configurations.Add(new UserRoleConfiguration());
         }
     }
 }

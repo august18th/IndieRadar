@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using IndieRadar.Data.Infrastructure.Context;
+using IndieRadar.Data.Interfaces.Repositories;
 using IndieRadar.Data.Repositories.Base;
 using IndieRadar.Model.Models;
 using Microsoft.AspNet.Identity;
@@ -10,11 +13,16 @@ namespace IndieRadar.Data.Repositories.Identity
 {
     public class UserStore : GenericRepository<ApplicationUser>,
         IUserPasswordStore<ApplicationUser>, IUserLockoutStore<ApplicationUser, String>,
-        IUserTwoFactorStore<ApplicationUser, String>
+        IUserTwoFactorStore<ApplicationUser, String>, IUserRoleStore<ApplicationUser, String>,
+        IRoleStore<Role, String>
     {
-        public UserStore(IDbContext dbContext) : base(dbContext)
-        {
+        private readonly IUserRoleRepository _userRoleRepository;
+        private readonly IRoleRepository _roleRepository;
 
+        public UserStore(IDbContext dbContext, IUserRoleRepository userRoleRepository, IRoleRepository roleRepository) : base(dbContext)
+        {
+            _userRoleRepository = userRoleRepository;
+            _roleRepository = roleRepository;
         }
 
         public new async Task UpdateAsync(ApplicationUser item)
@@ -142,6 +150,116 @@ namespace IndieRadar.Data.Repositories.Identity
         public async Task<bool> GetTwoFactorEnabledAsync(ApplicationUser user)
         {
             return await Task.FromResult(false);
+        }
+
+        public async Task AddToRoleAsync(ApplicationUser user, string roleName)
+        {
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
+            if (string.IsNullOrWhiteSpace(roleName))
+                throw new ArgumentException("Invalid role name");
+
+            var role = await ((IRoleStore<Role, String>)this).FindByNameAsync(roleName);
+
+            if (role == null)
+                throw new InvalidOperationException("Role with this name doesn't exist");
+
+
+            await _userRoleRepository.AddAsync(new UserRole
+            {
+                UserId = user.Id,
+                RoleId = role.Id
+            });
+        }
+
+        public async Task RemoveFromRoleAsync(ApplicationUser user, string roleName)
+        {
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
+            if (string.IsNullOrWhiteSpace(roleName))
+                throw new ArgumentException("Invalid role name");
+
+            var role = await ((IRoleStore<Role, String>)this).FindByNameAsync(roleName);
+
+            if (role == null)
+                throw new InvalidOperationException("User is not in this role");
+
+            var userRole = (await _userRoleRepository
+                .GetItemsAsync(urs => urs.Where(ur => ur.UserId == user.Id && ur.RoleId == role.Id)))
+                .FirstOrDefault();
+
+            if (userRole == null)
+                throw new InvalidOperationException($"User {user.UserName} is not in {roleName} role");
+
+            await _userRoleRepository.RemoveAsync(userRole);
+        }
+
+        public async Task<IList<string>> GetRolesAsync(ApplicationUser user)
+        {
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
+
+            var userRoles =
+                await _userRoleRepository.GetItemsAsync(
+                    urs => urs.Include(ur => ur.Role).Where(ur => ur.UserId == user.Id));
+
+            return await Task.FromResult(userRoles.Select(r => r.Role.Name).Distinct().ToList());
+        }
+
+        public async Task<bool> IsInRoleAsync(ApplicationUser user, string roleName)
+        {
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
+            if (string.IsNullOrWhiteSpace(roleName))
+                throw new ArgumentException("Invalid role name");
+
+            var role = await ((IRoleStore<Role, String>)this).FindByNameAsync(roleName);
+
+            if (role == null)
+                throw new InvalidOperationException("Role with this name doesn't exist");
+
+            var userRoles =
+                await _userRoleRepository.GetItemsAsync(
+                    urs => urs.Where(ur => ur.UserId == user.Id && ur.RoleId == role.Id));
+
+            return userRoles.FirstOrDefault() != null;
+        }
+
+        public async Task CreateAsync(Role role)
+        {
+            if (role == null)
+                throw new ArgumentNullException(nameof(role));
+
+            await _roleRepository.AddAsync(role);
+        }
+
+        public async Task UpdateAsync(Role role)
+        {
+            if (role == null)
+                throw new ArgumentNullException(nameof(role));
+
+            await _roleRepository.UpdateAsync(role);
+        }
+
+        public async Task DeleteAsync(Role role)
+        {
+            if (role == null)
+                throw new ArgumentNullException(nameof(role));
+
+            await _roleRepository.RemoveAsync(role);
+        }
+
+        async Task<Role> IRoleStore<Role, String>.FindByIdAsync(string roleId)
+        {
+            return await _roleRepository.FindFirstAsync(r => r.Id == roleId);
+        }
+
+        async Task<Role> IRoleStore<Role, String>.FindByNameAsync(string roleName)
+        {
+            if (string.IsNullOrWhiteSpace(roleName))
+                throw new ArgumentException("Invalid role name");
+
+            return await _roleRepository.FindFirstAsync(r => r.Name.ToUpper() == roleName.ToUpper());
         }
     }
 }
