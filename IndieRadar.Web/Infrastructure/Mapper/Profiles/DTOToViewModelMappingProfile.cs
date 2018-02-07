@@ -9,6 +9,8 @@ namespace IndieRadar.Web.Infrastructure.Mapper.Profiles
         public DTOToViewModelMappingProfile()
         {
             CreateMap<GameDTO, GameCardViewModel>();
+            CreateMap<GenreDTO, GenreViewModel>();
+            CreateMap<PlatformDTO, PlatformViewModel>();
         }
     }
 }

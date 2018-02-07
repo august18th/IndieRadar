@@ -7,6 +7,6 @@ namespace IndieRadar.Services.DTO
     public class GenreDTO
     {
         public String GenreName { get; set; }
-        public IList<GameGenre> GameGenres { get; set; }
+        public IList<GameGenreDTO> GameGenres { get; set; }
     }
 }

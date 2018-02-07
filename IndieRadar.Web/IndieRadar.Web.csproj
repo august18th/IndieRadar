@@ -202,12 +202,15 @@
     <Compile Include="Infrastructure\Mapper\Profiles\DTOToViewModelMappingProfile.cs" />
     <Compile Include="Infrastructure\Mapper\Profiles\ViewModelToDTOMappingProfile.cs" />
     <Compile Include="Infrastructure\SignInService.cs" />
+    <Compile Include="Models\GameCriterias.cs" />
     <Compile Include="Models\PageInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\GameCardListViewModel.cs" />
     <Compile Include="ViewModels\GameCardViewModel.cs" />
     <Compile Include="ViewModels\CreateGameViewModel.cs" />
+    <Compile Include="ViewModels\GameGenreViewModel.cs" />
+    <Compile Include="ViewModels\GameViewModel.cs" />
     <Compile Include="ViewModels\GenreViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\PlatformViewModel.cs" />
@@ -250,10 +253,10 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\SuccessRegistration.cshtml" />
+    <Content Include="Views\Admin\AddGame.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Admin\" />
     <Folder Include="Views\Games\" />
   </ItemGroup>
   <ItemGroup>

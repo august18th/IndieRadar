@@ -10,6 +10,10 @@ namespace IndieRadar.Web.Infrastructure.Mapper.Profiles
         {
             CreateMap<GameDTO, Game>();
             CreateMap<UserDTO, ApplicationUser>();
+            CreateMap<GenreDTO, Genre>();
+            CreateMap<GameGenreDTO, GameGenre>();
+            CreateMap<GamePlatformDTO, GamePlatform>();
+            CreateMap<PlatformDTO, Platform>();
         }
     }
 }

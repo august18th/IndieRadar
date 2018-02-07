@@ -1,0 +1,27 @@
+﻿@model IndieRadar.Web.ViewModels.CreateGameViewModel
+@{
+    ViewBag.Title = "AddGame";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AddGame</h2>
+@using (Html.BeginForm("AddGame", "Admin", FormMethod.Post))
+{
+    @Html.TextBoxFor(g => g.Game.GameName)
+    @Html.ValidationMessageFor(v => v.Game.GameName)
+    @Html.TextAreaFor(g => g.Game.Description)
+    @Html.ValidationMessageFor(v => v.Game.Description)
+    @Html.TextBoxFor(g => g.Game.Developer)
+    @Html.ValidationMessageFor(v => v.Game.Developer)
+    @Html.TextBoxFor(g => g.Game.Version)
+    @Html.ValidationMessageFor(v => v.Game.Version)
+    @Html.ListBoxFor(c => c.Game.GameGenres,
+        new MultiSelectList(Model.GameCriterias.Genres, "GenreName", "GenreName"))
+    @Html.ValidationMessageFor(v => v.Game.GameGenres)
+    @Html.ListBoxFor(c => c.Game.GamePlatforms,
+        new MultiSelectList(Model.GameCriterias.Platforms, "Name", "Name"))
+    @Html.ValidationMessageFor(v => v.Game.GamePlatforms)
+    <input type="submit" value="Отправить" />
+}
+
+

@@ -58,6 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTO\GameDTO.cs" />
+    <Compile Include="DTO\GameGenreDTO.cs" />
+    <Compile Include="DTO\GamePlatformDTO.cs" />
     <Compile Include="DTO\GenreDTO.cs" />
     <Compile Include="DTO\PlatformDTO.cs" />
     <Compile Include="DTO\UserDTO.cs" />

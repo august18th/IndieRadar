@@ -8,7 +8,7 @@ namespace IndieRadar.Data.Configurations
     {
         public GameGenreConfiguration()
         {
-            HasKey(p => new { p.GameId, p.GenreName });
+            HasKey(p => new { p.GameId, p.GenreId });
         }
     }
 }

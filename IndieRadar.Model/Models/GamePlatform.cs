@@ -8,6 +8,6 @@ namespace IndieRadar.Model.Models
         public Int32 GameId { get; set; }
 
         public Platform Platform { get; set; }
-        public Int32 PlatformId { get; set; }
+        public String PlatformId { get; set; }
     }
 }

@@ -14,9 +14,9 @@ namespace IndieRadar.Services.DTO
         public Double? Rating { get; set; }
         public String Version { get; set; }
 
-        public IList<GameGenre> GameGenres { get; set; }
+        public IList<GameGenreDTO> GameGenres { get; set; }
 
-        public IList<GamePlatform> GamePlatforms { get; set; }
+        public IList<GamePlatformDTO> GamePlatforms { get; set; }
 
         public IList<GameplayPhoto> GameplayPhotos { get; set; }
     }
