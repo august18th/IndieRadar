@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
 
 namespace IndieRadar.Web.ViewModels
 {
@@ -21,7 +22,7 @@ namespace IndieRadar.Web.ViewModels
         [StringLength(20, ErrorMessage = "Версия не должна содержать больше 20 символов")]
         public String Version { get; set; }
 
-        public Byte[] MainPhoto { get; set; }
+        public HttpPostedFileBase MainPhoto { get; set; }
         public Double? Rating { get; set; }
 
         [Required(ErrorMessage = "Пожалуйста укажите жанр игры (или несколько)")]

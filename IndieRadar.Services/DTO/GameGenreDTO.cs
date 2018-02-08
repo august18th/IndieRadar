@@ -8,6 +8,6 @@ namespace IndieRadar.Services.DTO
         public Int32 GameId { get; set; }
 
         public GenreDTO Genre { get; set; }
-        public String GenreId { get; set; }
+        public String GenreName { get; set; }
     }
 }

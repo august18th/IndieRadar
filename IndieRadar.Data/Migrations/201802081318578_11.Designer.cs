@@ -7,13 +7,13 @@ namespace IndieRadar.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class _3 : IMigrationMetadata
+    public sealed partial class _11 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(_3));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(_11));
         
         string IMigrationMetadata.Id
         {
-            get { return "201802071520304_3"; }
+            get { return "201802081318578_11"; }
         }
         
         string IMigrationMetadata.Source

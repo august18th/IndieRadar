@@ -8,6 +8,6 @@ namespace IndieRadar.Services.DTO
         public Int32 GameId { get; set; }
 
         public PlatformDTO Platform { get; set; }
-        public String PlatformId { get; set; }
+        public String PlatformName { get; set; }
     }
 }

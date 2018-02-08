@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using IndieRadar.Model.Models;
+using IndieRadar.Services.DTO;
 
 namespace IndieRadar.Web.ViewModels
 {
@@ -13,6 +14,6 @@ namespace IndieRadar.Web.ViewModels
         public Double? Rating { get; set; }
         public String Version { get; set; }
 
-        public IList<GameGenre> GameGenres { get; set; }
+        public IList<GameGenreDTO> GameGenres { get; set; }
     }
 }

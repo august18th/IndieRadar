@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using IndieRadar.Web.Models;
+﻿using IndieRadar.Web.Models;
 
 namespace IndieRadar.Web.ViewModels
 {

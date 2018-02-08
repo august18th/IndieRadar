@@ -40,7 +40,7 @@ namespace IndieRadar.Services.Services
             }
 
             var gamesOfTheGenre = await _gameRepository.FindAllAsync(g =>
-                g.GameGenres.Any(c => c.GenreId == gameGenre));
+                g.GameGenres.Any(c => c.GenreName == gameGenre));
             if (gamesOfTheGenre == null)
             {
                 throw new NullReferenceException("Games with this genre does not exist");
@@ -67,7 +67,7 @@ namespace IndieRadar.Services.Services
             }
 
             var gamesOfTheGenre = await _gameRepository.FindAllAsync(g =>
-                g.GameGenres.Any(c => c.GenreId == gameGenre));
+                g.GameGenres.Any(c => c.GenreName == gameGenre));
             if (gamesOfTheGenre == null)
             {
                 throw new NullReferenceException("Games with this genre does not exist");

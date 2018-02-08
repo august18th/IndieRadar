@@ -12,12 +12,12 @@ namespace IndieRadar.Data.Infrastructure
         {
             var initialGenres = new List<Genre>
             {
-                new Genre {GenreName = "Arcade"},
-                new Genre {GenreName = "Strategy"},
-                new Genre {GenreName = "Adventure"},
-                new Genre {GenreName = "RPG"},
-                new Genre {GenreName = "Simulation"},
-                new Genre {GenreName = "Sandbox"}
+                new Genre {Name = "Arcade"},
+                new Genre {Name = "Strategy"},
+                new Genre {Name = "Adventure"},
+                new Genre {Name = "RPG"},
+                new Genre {Name = "Simulation"},
+                new Genre {Name = "Sandbox"}
             };
             initialGenres.ForEach(m => context.Genres.Add(m));
 

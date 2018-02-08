@@ -75,13 +75,9 @@
     <Compile Include="Interfaces\Repositories\IRoleRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUserRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUserRoleRepository.cs" />
-    <Compile Include="Migrations\201802071500139_2.cs" />
-    <Compile Include="Migrations\201802071500139_2.Designer.cs">
-      <DependentUpon>201802071500139_2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802071520304_3.cs" />
-    <Compile Include="Migrations\201802071520304_3.Designer.cs">
-      <DependentUpon>201802071520304_3.cs</DependentUpon>
+    <Compile Include="Migrations\201802081318578_11.cs" />
+    <Compile Include="Migrations\201802081318578_11.Designer.cs">
+      <DependentUpon>201802081318578_11.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -110,11 +106,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802071500139_2.resx">
-      <DependentUpon>201802071500139_2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802071520304_3.resx">
-      <DependentUpon>201802071520304_3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802081318578_11.resx">
+      <DependentUpon>201802081318578_11.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

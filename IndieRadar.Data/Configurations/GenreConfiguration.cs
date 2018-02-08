@@ -7,7 +7,7 @@ namespace IndieRadar.Data.Configurations
     {
         public GenreConfiguration()
         {
-            HasKey(g => g.GenreName);
+            HasKey(g => g.Name);
         }
     }
 }

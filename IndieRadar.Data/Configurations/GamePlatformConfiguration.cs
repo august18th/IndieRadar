@@ -7,7 +7,7 @@ namespace IndieRadar.Data.Configurations
     {
         public GamePlatformConfiguration()
         {
-            HasKey(p => new { p.GameId, p.PlatformId });
+            HasKey(p => new { p.GameId, p.PlatformName });
         }
     }
 }
