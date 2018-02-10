@@ -1,0 +1,27 @@
+﻿@using IndieRadar.Web.Helpers
+@model IndieRadar.Web.ViewModels.GameCardListViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-8" style="margin-top: 24px">
+    @foreach (var game in Model.GameCards)
+    {
+        <!-- Blog Post -->
+        <div class="card mb-4">
+            <img class="card-img-top" src="@game.MainPhoto" alt="Card image cap">
+            <div class="card-body">
+                <h2 class="card-title">@game.GameName</h2>
+                <p class="card-text">@game.Description</p>
+                <a href="#" class="btn btn-primary">Read More &rarr;</a>
+            </div>
+            <div class="card-footer text-muted">
+                @game.Version
+            </div>
+        </div>
+    }
+    @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new { page = x }))
+</div>
+@Html.Partial("FilterCriteriasPartial", Model.FilterCriterias)
+

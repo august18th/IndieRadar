@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
 using IndieRadar.Services.DTO;
@@ -15,12 +13,17 @@ namespace IndieRadar.Web.Controllers
     public class GamesController : Controller
     {
         private readonly IGameService _gameService;
+        private readonly IGenreService _genreService;
+        private readonly IPlatformService _platformService;
         private readonly IMapper _mapper;
 
-        public GamesController(IGameService gameService, IMapper mapper)
+        public GamesController(IGameService gameService,
+            IMapper mapper, IGenreService genreService, IPlatformService platformService)
         {
             _gameService = gameService;
+            _genreService = genreService;
             _mapper = mapper;
+            _platformService = platformService;
         }
 
 
@@ -43,9 +46,21 @@ namespace IndieRadar.Web.Controllers
             GameCardListViewModel gameCardList = new GameCardListViewModel
             {
                 PageInfo = pageInfo,
-                GameCards = gameCards.ToList()
+                GameCards = gameCards.ToList(),
+                FilterCriterias = await GetFilterCriterias()
             };
             return View(gameCardList);
+        }
+
+        [NonAction]
+        public async Task<GameCriterias> GetFilterCriterias()
+        {
+            var genres =
+                _mapper.Map<ICollection<GenreDTO>, ICollection<GenreViewModel>>(await _genreService.GetGenresAsync());
+            var platforms =
+                _mapper.Map<ICollection<PlatformDTO>, ICollection<PlatformViewModel>>(await _platformService.GetPlatformsAsync());
+
+            return new GameCriterias { Genres = genres.ToList(), Platforms = platforms.ToList() };
         }
     }
 }

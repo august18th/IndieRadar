@@ -194,6 +194,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\PagingHelper.cs" />
     <Compile Include="Infrastructure\DI\AutofacContainerFactory.cs" />
     <Compile Include="Infrastructure\ISignInService.cs" />
     <Compile Include="Infrastructure\Mapper\AutoMapperConfiguration.cs" />
@@ -222,7 +223,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -254,10 +254,11 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\SuccessRegistration.cshtml" />
     <Content Include="Views\Admin\AddGame.cshtml" />
+    <Content Include="Views\Games\Index.cshtml" />
+    <Content Include="Views\Games\FilterCriteriasPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Games\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -12,7 +12,7 @@ namespace IndieRadar.Web
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Account", action = "Register", id = UrlParameter.Optional }
+                defaults: new { controller = "Games", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

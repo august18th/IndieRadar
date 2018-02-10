@@ -7,5 +7,6 @@ namespace IndieRadar.Web.ViewModels
     {
         public IList<GameCardViewModel> GameCards { get; set; }
         public PageInfo PageInfo { get; set; }
+        public GameCriterias FilterCriterias { get; set; }
     }
 }

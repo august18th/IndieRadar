@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace IndieRadar.Web
 {
@@ -25,7 +24,7 @@ namespace IndieRadar.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                            "~/ Content / bootstrap.min.css"));
         }
     }
 }
