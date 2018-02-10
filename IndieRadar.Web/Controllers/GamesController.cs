@@ -32,11 +32,38 @@ namespace IndieRadar.Web.Controllers
         [HttpGet]
         public async Task<ActionResult> Index(int page = 1)
         {
-            int pageSize = 10;
-            var games = await _gameService.GetGamesAsync();
-            var gameCards = _mapper.Map<IEnumerable<GameDTO>, IEnumerable<GameCardViewModel>>
-                (games.Skip((page - 1) * pageSize).Take(pageSize));
+            var games = _mapper.Map<IEnumerable<GameDTO>, IEnumerable<GameCardViewModel>>
+                (await _gameService.GetGamesAsync());
+            GameCardListViewModel gameCardList = await CreateGameCardList(page, games.ToList());
+            return View(gameCardList);
+        }
 
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<ActionResult> FilterByGenre(string genreName, int page = 1)
+        {
+            var games = _mapper.Map<IEnumerable<GameDTO>, IEnumerable<GameCardViewModel>>
+                (await _gameService.GetGamesByGenreAsync(genreName));
+            GameCardListViewModel gameCardList = await CreateGameCardList(page, games.ToList());
+            return View("Index", gameCardList);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<ActionResult> FilterByPlatform(string platformName, int page = 1)
+        {
+            var games = _mapper.Map<IEnumerable<GameDTO>, IEnumerable<GameCardViewModel>>
+                (await _gameService.GetGamesByPlatformAsync(platformName));
+            GameCardListViewModel gameCardList = await CreateGameCardList(page, games.ToList());
+            return View("Index", gameCardList);
+        }
+
+        [NonAction]
+        public async Task<GameCardListViewModel> CreateGameCardList(int page, IList<GameCardViewModel> games)
+        {
+            int pageSize = 10;
+            var gameCards =
+                games.Skip((page - 1) * pageSize).Take(pageSize);
             PageInfo pageInfo = new PageInfo
             {
                 PageNumber = page,
@@ -49,7 +76,7 @@ namespace IndieRadar.Web.Controllers
                 GameCards = gameCards.ToList(),
                 FilterCriterias = await GetFilterCriterias()
             };
-            return View(gameCardList);
+            return gameCardList;
         }
 
         [NonAction]

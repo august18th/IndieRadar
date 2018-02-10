@@ -15,7 +15,7 @@
         </div>
     </div>
     <div class="card my-4">
-        <h5 class="card-header">Categories</h5>
+        <h5 class="card-header">Genres</h5>
         <div class="card-body">
             <div class="row">
                 <div class="col-lg-6">
@@ -23,7 +23,7 @@
                         @foreach (var genre in Model.Genres.Take(Model.Genres.Count / 2))
                         {
                             <li>
-                                <a>@genre.Name</a>
+                                @Html.ActionLink(genre.Name, "FilterByGenre", new { genreName = genre.Name }, new { @class = "nav-link" })
                             </li>
                         }
                     </ul>
@@ -33,7 +33,7 @@
                         @foreach (var genre in Model.Genres.Skip(Model.Genres.Count / 2))
                         {
                             <li>
-                                <a>@genre.Name</a>
+                                @Html.ActionLink(genre.Name, "FilterByGenre", new { genreName = genre.Name }, new { @class = "nav-link" })
                             </li>
                         }
                     </ul>
@@ -48,20 +48,20 @@
             <div class="row">
                 <div class="col-lg-6">
                     <ul class="list-unstyled mb-0">
-                        @foreach (var genre in Model.Platforms.Take(Model.Platforms.Count / 2))
+                        @foreach (var platform in Model.Platforms.Take(Model.Platforms.Count / 2))
                         {
                             <li>
-                                <a>@genre.Name</a>
+                                @Html.ActionLink(platform.Name, "FilterByPlatform", new { platformName = platform.Name }, new { @class = "nav-link" })
                             </li>
                         }
                     </ul>
                 </div>
                 <div class="col-lg-6">
                     <ul class="list-unstyled mb-0">
-                        @foreach (var genre in Model.Platforms.Skip(Model.Platforms.Count / 2))
+                        @foreach (var platform in Model.Platforms.Skip(Model.Platforms.Count / 2))
                         {
                             <li>
-                                <a>@genre.Name</a>
+                                @Html.ActionLink(platform.Name, "FilterByPlatform", new { platformName = platform.Name }, new { @class = "nav-link" })
                             </li>
                         }
                     </ul>
