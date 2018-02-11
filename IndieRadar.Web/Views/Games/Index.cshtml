@@ -5,23 +5,45 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="col-md-8" style="margin-top: 24px">
+<div class="col-md-8" style="margin-top: 24px" id="results">
+    <div class="alert alert-dismissible alert-success">
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            <button type="button" class="btn btn-info">Sort</button>
+            <div class="btn-group" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    @Html.ActionLink("By Date", "SortByDate", null, new { @class = "dropdown-item" })
+                    <a class="dropdown-item" href="#">Dropdown link</a>
+                </div>
+            </div>
+        </div>
+    </div>
     @foreach (var game in Model.GameCards)
     {
-        <!-- Blog Post -->
         <div class="card mb-4">
             <img class="card-img-top" src="@game.MainPhoto" alt="Card image cap">
             <div class="card-body">
                 <h2 class="card-title">@game.GameName</h2>
                 <p class="card-text">@game.Description</p>
-                <a href="#" class="btn btn-primary">Read More &rarr;</a>
+                <a href="#" class="btn btn-primary">Read More &#8658;</a>
             </div>
             <div class="card-footer text-muted">
                 @game.Version
             </div>
         </div>
     }
-    @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new { page = x }))
+    @if (ViewContext.RouteData.Values["action"].ToString().Equals("Index"))
+    {
+        @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new { page = x }))
+    }
+    @if (ViewContext.RouteData.Values["action"].ToString().Equals("FilterByGenre"))
+    {
+        @Html.PageLinks(Model.PageInfo, x => Url.Action("FilterByGenre", new { genreName = Request.Params["genreName"], page = x }))
+    }
+    @if (ViewContext.RouteData.Values["action"].ToString().Equals("FilterByPlatform"))
+    {
+        @Html.PageLinks(Model.PageInfo, x => Url.Action("FilterByPlatform", new { platformName = Request.Params["platformName"], page = x }))
+    }
 </div>
 @Html.Partial("FilterCriteriasPartial", Model.FilterCriterias)
 

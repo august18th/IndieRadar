@@ -58,10 +58,18 @@ namespace IndieRadar.Web.Controllers
             return View("Index", gameCardList);
         }
 
+        public async Task<ActionResult> SortByDate(int page = 1)
+        {
+            var games = _mapper.Map<IEnumerable<GameDTO>, IEnumerable<GameCardViewModel>>
+                (await _gameService.GetGamesAsync());
+            GameCardListViewModel gameCardList = await CreateGameCardList(page, games.Reverse().ToList());
+            return View("Index", gameCardList);
+        }
+
         [NonAction]
         public async Task<GameCardListViewModel> CreateGameCardList(int page, IList<GameCardViewModel> games)
         {
-            int pageSize = 10;
+            int pageSize = 1;
             var gameCards =
                 games.Skip((page - 1) * pageSize).Take(pageSize);
             PageInfo pageInfo = new PageInfo
