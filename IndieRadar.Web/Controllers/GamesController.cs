@@ -6,6 +6,7 @@ using AutoMapper;
 using IndieRadar.Services.DTO;
 using IndieRadar.Services.Interfaces;
 using IndieRadar.Web.Models;
+using IndieRadar.Web.ModelsEnums;
 using IndieRadar.Web.ViewModels;
 
 namespace IndieRadar.Web.Controllers
@@ -30,11 +31,12 @@ namespace IndieRadar.Web.Controllers
         // GET: Games
         [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult> Index(int page = 1)
+        public async Task<ActionResult> Index(int page = 1, GamesSortOrder sortOrder = GamesSortOrder.ByDateAscending)
         {
-            var games = _mapper.Map<IEnumerable<GameDTO>, IEnumerable<GameCardViewModel>>
+            var games = _mapper.Map<ICollection<GameDTO>, ICollection<GameCardViewModel>>
                 (await _gameService.GetGamesAsync());
-            GameCardListViewModel gameCardList = await CreateGameCardList(page, games.ToList());
+            games = SortGames(sortOrder, games);
+            GameCardListViewModel gameCardList = await CreateGameCardList(page, games);
             return View(gameCardList);
         }
 
@@ -42,9 +44,9 @@ namespace IndieRadar.Web.Controllers
         [HttpGet]
         public async Task<ActionResult> FilterByGenre(string genreName, int page = 1)
         {
-            var games = _mapper.Map<IEnumerable<GameDTO>, IEnumerable<GameCardViewModel>>
+            var games = _mapper.Map<ICollection<GameDTO>, ICollection<GameCardViewModel>>
                 (await _gameService.GetGamesByGenreAsync(genreName));
-            GameCardListViewModel gameCardList = await CreateGameCardList(page, games.ToList());
+            GameCardListViewModel gameCardList = await CreateGameCardList(page, games);
             return View("Index", gameCardList);
         }
 
@@ -52,22 +54,16 @@ namespace IndieRadar.Web.Controllers
         [HttpGet]
         public async Task<ActionResult> FilterByPlatform(string platformName, int page = 1)
         {
-            var games = _mapper.Map<IEnumerable<GameDTO>, IEnumerable<GameCardViewModel>>
+            var games = _mapper.Map<ICollection<GameDTO>, ICollection<GameCardViewModel>>
                 (await _gameService.GetGamesByPlatformAsync(platformName));
             GameCardListViewModel gameCardList = await CreateGameCardList(page, games.ToList());
             return View("Index", gameCardList);
         }
 
-        public async Task<ActionResult> SortByDate(int page = 1)
-        {
-            var games = _mapper.Map<IEnumerable<GameDTO>, IEnumerable<GameCardViewModel>>
-                (await _gameService.GetGamesAsync());
-            GameCardListViewModel gameCardList = await CreateGameCardList(page, games.Reverse().ToList());
-            return View("Index", gameCardList);
-        }
+        #region NonAction
 
         [NonAction]
-        public async Task<GameCardListViewModel> CreateGameCardList(int page, IList<GameCardViewModel> games)
+        public async Task<GameCardListViewModel> CreateGameCardList(int page, ICollection<GameCardViewModel> games)
         {
             int pageSize = 1;
             var gameCards =
@@ -88,6 +84,22 @@ namespace IndieRadar.Web.Controllers
         }
 
         [NonAction]
+        public ICollection<GameCardViewModel> SortGames(GamesSortOrder sortOrder, ICollection<GameCardViewModel> games)
+        {
+            switch (sortOrder)
+            {
+                case GamesSortOrder.ByDateDescending:
+                    return games.Reverse().ToList();
+                case GamesSortOrder.ByRatingAscending:
+                    return games.OrderBy(game => game.Rating).ToList();
+                case GamesSortOrder.ByRatingDescending:
+                    return games.OrderByDescending(game => game.Rating).ToList();
+                default:
+                    return games;
+            }
+        }
+
+        [NonAction]
         public async Task<GameCriterias> GetFilterCriterias()
         {
             var genres =
@@ -97,5 +109,7 @@ namespace IndieRadar.Web.Controllers
 
             return new GameCriterias { Genres = genres.ToList(), Platforms = platforms.ToList() };
         }
+
+        #endregion
     }
 }

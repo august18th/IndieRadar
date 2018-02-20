@@ -203,6 +203,7 @@
     <Compile Include="Infrastructure\Mapper\Profiles\DTOToViewModelMappingProfile.cs" />
     <Compile Include="Infrastructure\Mapper\Profiles\ViewModelToDTOMappingProfile.cs" />
     <Compile Include="Infrastructure\SignInService.cs" />
+    <Compile Include="ModelsEnums\GamesSortOrder.cs" />
     <Compile Include="Models\GameCriterias.cs" />
     <Compile Include="Models\PageInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
