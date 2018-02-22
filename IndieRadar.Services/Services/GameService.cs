@@ -64,33 +64,6 @@ namespace IndieRadar.Services.Services
             return _mapper.Map<ICollection<Game>, ICollection<GameDTO>>(gamesOfTheGenre);
         }
 
-        public async Task<ICollection<GameDTO>> GetSortedGamesByRatingAsync()
-        {
-            var games = await _gameRepository.GetItemsAsync();
-            if (games == null)
-            {
-                throw new NullReferenceException("Games does not exist");
-            }
-
-            return _mapper.Map<ICollection<Game>, ICollection<GameDTO>>(games.OrderBy(g => g.Rating).ToList());
-        }
-
-        public async Task<ICollection<GameDTO>> GetSortedGamesByRatingAndByGenreAsync(string gameGenre)
-        {
-            if (gameGenre == null)
-            {
-                throw new ArgumentNullException(nameof(gameGenre));
-            }
-
-            var gamesOfTheGenre = await _gameRepository.FindAllAsync(g =>
-                g.GameGenres.Any(c => c.GenreName == gameGenre));
-            if (gamesOfTheGenre == null)
-            {
-                throw new NullReferenceException("Games with this genre does not exist");
-            }
-            return _mapper.Map<ICollection<Game>, ICollection<GameDTO>>(gamesOfTheGenre.OrderBy(g => g.Rating).ToList());
-        }
-
         public async Task<GameDTO> GetGameByIdAsync(int? gameId)
         {
             if (gameId == null)

@@ -31,33 +31,31 @@ namespace IndieRadar.Web.Controllers
         // GET: Games
         [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult> Index(int page = 1, GamesSortOrder sortOrder = GamesSortOrder.ByDateAscending)
+        public async Task<ActionResult> Index(string genreName, string platformName,
+            int page = 1, GamesSortOrder sortOrder = GamesSortOrder.ByDateAscending)
         {
-            var games = _mapper.Map<ICollection<GameDTO>, ICollection<GameCardViewModel>>
-                (await _gameService.GetGamesAsync());
+            ICollection<GameCardViewModel> games = new List<GameCardViewModel>();
+            if (genreName != null)
+            {
+                games = _mapper.Map<ICollection<GameDTO>, ICollection<GameCardViewModel>>
+                    (await _gameService.GetGamesByGenreAsync(genreName));
+            }
+
+            if (platformName != null)
+            {
+                games = _mapper.Map<ICollection<GameDTO>, ICollection<GameCardViewModel>>
+                    (await _gameService.GetGamesByPlatformAsync(platformName));
+            }
+
+            if (platformName == null && genreName == null)
+            {
+                games = _mapper.Map<ICollection<GameDTO>, ICollection<GameCardViewModel>>
+                    (await _gameService.GetGamesAsync());
+            }
+
             games = SortGames(sortOrder, games);
             GameCardListViewModel gameCardList = await CreateGameCardList(page, games);
             return View(gameCardList);
-        }
-
-        [AllowAnonymous]
-        [HttpGet]
-        public async Task<ActionResult> FilterByGenre(string genreName, int page = 1)
-        {
-            var games = _mapper.Map<ICollection<GameDTO>, ICollection<GameCardViewModel>>
-                (await _gameService.GetGamesByGenreAsync(genreName));
-            GameCardListViewModel gameCardList = await CreateGameCardList(page, games);
-            return View("Index", gameCardList);
-        }
-
-        [AllowAnonymous]
-        [HttpGet]
-        public async Task<ActionResult> FilterByPlatform(string platformName, int page = 1)
-        {
-            var games = _mapper.Map<ICollection<GameDTO>, ICollection<GameCardViewModel>>
-                (await _gameService.GetGamesByPlatformAsync(platformName));
-            GameCardListViewModel gameCardList = await CreateGameCardList(page, games.ToList());
-            return View("Index", gameCardList);
         }
 
         #region NonAction

@@ -12,8 +12,13 @@
             <div class="btn-group" role="group">
                 <button id="btnGroupDrop1" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                 <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                    @Html.ActionLink("By Date", ViewContext.RouteData.Values["action"].ToString(), 
-                        new { sortOrder = "ByDateDescending" }, new { @class = "dropdown-item" })
+                    @Html.ActionLink("By Date", "Index",
+                        new
+                        {
+                            sortOrder = "ByDateDescending",
+                            platformName = Request.Params["platformName"],
+                            genreName = Request.Params["genreName"]
+                        }, new { @class = "dropdown-item" })
                     <a class="dropdown-item" href="#">Dropdown link</a>
                 </div>
             </div>
@@ -33,23 +38,16 @@
             </div>
         </div>
     }
-    @switch (ViewContext.RouteData.Values["action"].ToString())
-    {
-        case "Index":
-            @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", 
-                new { sortOrder = Request.Params["sortOrder"] ?? "ByDateAscending", page = x }))
-            break;
 
-        case "FilterByGenre":
-            @Html.PageLinks(Model.PageInfo, x => Url.Action("FilterByGenre", 
-                new { genreName = Request.Params["genreName"], page = x, sortOrder = Request.Params["sortOrder"] ?? "ByDateAscending" }))
-            break;
+    @Html.PageLinks(Model.PageInfo, x => Url.Action("Index",
+                new
+                {
+                    sortOrder = Request.Params["sortOrder"],
+                    page = x,
+                    platformName = Request.Params["platformName"],
+                    genreName = Request.Params["genreName"]
+                }))
 
-        case "FilterByPlatform":
-            @Html.PageLinks(Model.PageInfo, x => Url.Action("FilterByPlatform", 
-                new { platformName = Request.Params["platformName"], page = x, sortOrder = Request.Params["sortOrder"] ?? "ByDateAscending" }))
-            break;
-    }
 </div>
 @Html.Partial("FilterCriteriasPartial", Model.FilterCriterias)
 

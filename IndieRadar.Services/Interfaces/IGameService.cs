@@ -10,8 +10,6 @@ namespace IndieRadar.Services.Interfaces
         Task<ICollection<GameDTO>> GetGamesAsync();
         Task<ICollection<GameDTO>> GetGamesByGenreAsync(String gameGenre);
         Task<ICollection<GameDTO>> GetGamesByPlatformAsync(String gamePlatform);
-        Task<ICollection<GameDTO>> GetSortedGamesByRatingAsync();
-        Task<ICollection<GameDTO>> GetSortedGamesByRatingAndByGenreAsync(String gameGenre);
         Task<GameDTO> GetGameByIdAsync(Int32? gameId);
         Task<GameDTO> CreateGameAsync(GameDTO game);
         Task<GameDTO> EditGameAsync(GameDTO gameToEdit);

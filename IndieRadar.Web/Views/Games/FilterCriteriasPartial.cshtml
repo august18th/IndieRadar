@@ -23,7 +23,7 @@
                         @foreach (var genre in Model.Genres.Take(Model.Genres.Count / 2))
                         {
                             <li>
-                                @Html.ActionLink(genre.Name, "FilterByGenre", new { genreName = genre.Name }, new { @class = "nav-link" })
+                                @Html.ActionLink(genre.Name, "Index", new { genreName = genre.Name }, new { @class = "nav-link" })
                             </li>
                         }
                     </ul>
@@ -33,7 +33,7 @@
                         @foreach (var genre in Model.Genres.Skip(Model.Genres.Count / 2))
                         {
                             <li>
-                                @Html.ActionLink(genre.Name, "FilterByGenre", new { genreName = genre.Name }, new { @class = "nav-link" })
+                                @Html.ActionLink(genre.Name, "Index", new { genreName = genre.Name }, new { @class = "nav-link" })
                             </li>
                         }
                     </ul>
@@ -51,7 +51,7 @@
                         @foreach (var platform in Model.Platforms.Take(Model.Platforms.Count / 2))
                         {
                             <li>
-                                @Html.ActionLink(platform.Name, "FilterByPlatform", new { platformName = platform.Name }, new { @class = "nav-link" })
+                                @Html.ActionLink(platform.Name, "Index", new { platformName = platform.Name }, new { @class = "nav-link" })
                             </li>
                         }
                     </ul>
@@ -61,7 +61,7 @@
                         @foreach (var platform in Model.Platforms.Skip(Model.Platforms.Count / 2))
                         {
                             <li>
-                                @Html.ActionLink(platform.Name, "FilterByPlatform", new { platformName = platform.Name }, new { @class = "nav-link" })
+                                @Html.ActionLink(platform.Name, "Index", new { platformName = platform.Name }, new { @class = "nav-link" })
                             </li>
                         }
                     </ul>
