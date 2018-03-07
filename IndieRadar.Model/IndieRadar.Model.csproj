@@ -65,6 +65,7 @@
     <Compile Include="Models\Platform.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\UserRole.cs" />
+    <Compile Include="Models\UserRating.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

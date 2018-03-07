@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using IndieRadar.Data.Configurations;
 using IndieRadar.Model.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -23,6 +22,7 @@ namespace IndieRadar.Data.Infrastructure.Context
         public IDbSet<Comment> Comments { get; set; }
         public IDbSet<CommentUser> CommentUsers { get; set; }
         public IDbSet<UserRole> UserRoles { get; set; }
+        public IDbSet<UserRating> UsersRatings { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -35,6 +35,7 @@ namespace IndieRadar.Data.Infrastructure.Context
             modelBuilder.Configurations.Add(new GenreConfiguration());
             modelBuilder.Configurations.Add(new UserRoleConfiguration());
             modelBuilder.Configurations.Add(new PlatformConfiguration());
+            modelBuilder.Configurations.Add(new UserRatingConfiguration());
         }
     }
 }

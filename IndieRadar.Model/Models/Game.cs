@@ -11,8 +11,9 @@ namespace IndieRadar.Model.Models
         public String Developer { get; set; }
         public String Description { get; set; }
         public Byte[] MainPhoto { get; set; }
-        public Double? Rating { get; set; }
         public String Version { get; set; }
+
+        public IList<UserRating> Ratings { get; set; }
 
         public IList<GameGenre> GameGenres { get; set; }
 
